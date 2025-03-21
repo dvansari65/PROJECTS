@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Switcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease; /* Smooth transition for color change */
+            padding: 20px;
+            text-align: center;
+        }
+        .color-button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .red { background-color: red; color: white; }
+        .green { background-color: green; color: white; }
+        .blue { background-color: blue; color: white; }
+        .yellow { background-color: yellow; color: black; }
+    </style>
+</head>
+<body>
+    <h1>Click a button to change the background color</h1>
+
+    <!-- Color buttons -->
+    <button id = "red" class="button" style ="background-color:red">red </button>
+    <button id = "green" class ="button"style="background-color:green" >Green</button>
+    <button id = "blue" class="button" style ="background-color:blue">Blue</button>
+    <button id= "yellow" class="button" style="background-color:yellow" >Yellow</button>
+
+    <script>
+        {
+            const buttons = document.querySelectorAll(".button")
+            const body = document.querySelector("body")
+            //body.style.backgroundColor =""
+            buttons.forEach(function(button){
+                console.log(button);
+                button.addEventListener("click",function(e){
+                    console.log(e);
+                    console.log(e.target)
+                    switch (e.target.id) {
+                        case "red":
+                            body.style.backgroundColor="red"                           
+                            break;
+                        case "blue":
+                            body.style.backgroundColor="blue" 
+                            break;
+                        case "green" :
+                            body.style.backgroundColor="green" 
+
+                            
+                            break;
+                        case "yellow":
+                            body.style.backgroundColor="yellow"  
+                            break; 
+                        default:
+                            console.log("invalid");
+                            
+                            break;
+                    }
+                     
+                    
+                })
+             })
+
+        }
+        
+    </script>
+</body>
+</html>
