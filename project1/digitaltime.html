@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <style>
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #282c34;
+      color: rgb(3, 3, 3);
+    }
+    #clock {
+            display: inline-block;
+            padding: 15px;
+            border-radius: 15px;
+            border: 3px solid black; /* Border around the number */
+            border-radius: 5px; /* Optional: rounded corners */
+            background-color: rgb(168, 229, 177); /* Optional: background color */
+        }
+    #clock {
+      font-size: 3em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class = "clock container" id="clock"><span style = "color: black; font-family: 'Courier New', Courier, monospace;">00:00:00</span></div>
+  <br>
+  </div>
+  </body>
+<script>
+    const clock = document.getElementById("clock")
+    setInterval(function(){
+        let date = new Date()
+        clock.innerHTML=date.toLocaleTimeString();
+    },1000)
+</script>
