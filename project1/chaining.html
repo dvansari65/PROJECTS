@@ -1,0 +1,42 @@
+let anarray = [1,2,3,4,5]
+
+const modification = anarray
+.map((val)=>{return val * 10} )
+.map((val)=>{return val + 2} )
+.filter((val)=>{return val >= 30})
+console.log(modification);
+//^^^^^^^^ CHAINING OF MAP LOOP ^^^^^^
+acc = 0
+let additionofelements = anarray.reduce((acc,curval)=>{
+    return acc + curval
+})
+console.log(additionofelements);
+let anotherfun = anarray.reduce(function(acc,curval){
+    console.log(`value of acc ${acc} and value of curval ${curval}`);
+    return acc + curval
+},0)
+console.log(anotherfun);
+//^^^^^^^^^reduce function^^^^^^^^^^
+
+let anarray1 = [
+    {
+        name:"anas",
+        age:20,
+        id:22122066
+    },
+    {
+        name:"tanmay",
+        age:22,
+        id:22122064
+    },
+    {
+        name:"pratham",
+        age:22,
+        id:22122068
+    },
+    {
+        name:"shabnam",
+        age:20,
+        id:22122065
+    },
+]
