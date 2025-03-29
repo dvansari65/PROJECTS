@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #2a2a2a; /* Dark background for the body */
+        }
+
+        .clock {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 5px solid #444444; /* Slightly dark border */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333333; /* Dark background color for the clock */
+        }
+
+        .clock span {
+            position: absolute;
+            transform: rotate(calc(30deg * var(--i)));
+            inset: 12px;
+            text-align: center;
+            color: #e0e0e0; /* Lighter color for numbers */
+            font-weight: bold;
+        }
+
+        .clock b {
+            position: absolute;
+            transform: rotate(calc(-30deg * var(--i)));
+        }
+
+        .clock::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #191717; /* Dark center point */
+            border-radius: 50%;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hand Styles */
+        .hand {
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            transform-origin: 50% 50%; /* Center the rotation */
+            transition: transform 0.1s ease-in-out;
+            z-index: 10;
+        }
+
+        /* Second hand */
+        #sec {
+            width: 2px; /* Thinner hand */
+            height: 120px; /* Long length for second hand */
+            background-color: #ff5733; /* Bright color for second hand (Red) */
+            z-index: 3;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg); /* Align it at the center */
+        }
+
+        /* Minute hand */
+        #minute {
+            width: 4px; /* Slightly thicker */
+            height: 100px; /* Shorter than second hand */
+            background-color: #4caf50; /* Green color for minute hand */
+            z-index: 5;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg); /* Align it at the center */
+        }
+
+        /* Hour hand */
+        #hour {
+            width: 6px; /* Thicker hand */
+            height: 80px; /* Shorter than minute hand */
+            background-color: #ce1313; /* Red color for hour hand */
+            z-index: 7;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg); /* Align it at the center */
+        }
+
+        /* Center of the clock */
+        .clock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="clock">
+        <div class="hand" id="sec"></div>
+        <div class="hand" id="minute"></div>
+        <div class="hand" id="hour"></div>
+        <span style="--i:1;"><b>1</b></span>
+        <span style="--i:2;"><b>2</b></span>
+        <span style="--i:3;"><b>3</b></span>
+        <span style="--i:4;"><b>4</b></span>
+        <span style="--i:5;"><b>5</b></span>
+        <span style="--i:6;"><b>6</b></span>
+        <span style="--i:7;"><b>7</b></span>
+        <span style="--i:8;"><b>8</b></span>
+        <span style="--i:9;"><b>9</b></span>
+        <span style="--i:10;"><b>10</b></span>
+        <span style="--i:11;"><b>11</b></span>
+        <span style="--i:12;"><b>12</b></span>
+    </div>
+</div>
+
+<script>
+    let minute = document.querySelector("#minute");
+    let hour = document.querySelector("#hour");
+    let sec = document.querySelector("#sec");
+
+    function displayTime() {
+        let date = new Date();
+        
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+
+        // Calculate rotation for hour hand
+        let hRotation = 30 * (hh % 12) + (mm / 2); // hours move a bit with each minute
+        // Calculate rotation for minute hand
+        let mRotation = 6 * mm; // 360deg / 60 minutes = 6 degrees per minute
+        // Calculate rotation for second hand
+        let secRotation = 6 * ss; // 360deg / 60 seconds = 6 degrees per second
+
+        // Apply rotations to clock hands
+        minute.style.transform = `translate(-50%, -100%) rotate(${mRotation}deg)`;
+        hour.style.transform = `translate(-50%, -100%) rotate(${hRotation}deg)`;
+        sec.style.transform = `translate(-50%, -100%) rotate(${secRotation}deg)`;
+    }
+
+    // Call the function every 1000 milliseconds (1 second)
+    setInterval(displayTime, 1000);
+    
+    // Call the function initially to set the time immediately
+    displayTime();
+</script>
+
+</body>
+</html>
