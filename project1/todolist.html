@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Container Styling */
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            width: 500px;
+            height: 500px;
+            overflow-y: auto;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect on container */
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header Styling */
+        h1 {
+            color: #3f51b5;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        /* Input Container Styling */
+        .input-container {
+            background-color: none;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .input-container input[type="text"] {
+            width: 70%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-container input[type="text"]:focus {
+            border-color: #5c6bc0;
+            box-shadow: 0 0 8px rgba(92, 107, 192, 0.3);
+        }
+
+        #button {
+            padding: 12px 18px;
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 25%;
+            margin-left: 10px;
+        }
+
+        #button:hover {
+            background-color: #3f51b5;
+            transform: translateY(-2px);
+        }
+
+        /* To Do List Styling */
+        .todolist {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        .todolist li {
+            background-color: #f3f4f6;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .todolist li:hover {
+            background-color: #e0e7ff;
+            transform: translateY(-3px);
+        }
+
+        /* Buttons inside list items */
+        .todolist button {
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .todolist button:hover {
+            background-color: #3f51b5;
+            transform: translateY(-1px);
+        }
+
+        /* Additional styling for p inside li */
+        .todolist li p {
+            flex-grow: 1;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        <div class="input-container">
+            <input id="enter" type="text" placeholder="Add new to do">
+            <input id="button" type="button" value="Add">
+        </div>
+        <ul class="todolist" id="List">
+            <!-- List items will appear here -->
+        </ul>
+    </div>
+
+    <script>
+        const inputbox = document.querySelector("#enter");
+        const button = document.querySelector("#button");
+        const todolist = document.querySelector(".todolist");
+
+        button.addEventListener("click", function() {
+            addTask();
+        });
+
+        function addTask() {
+            // Ensure the input field is not empty
+            if (inputbox.value.trim() === "") {
+                alert("Please type something.");
+                return;
+            }
+
+            // Create new list item
+            const li = document.createElement("li");
+            const p = document.createElement("p");
+            p.innerText = inputbox.value;
+
+            // Create and append the delete and edit buttons
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Remove";
+            deleteBtn.addEventListener("click", function() {
+                todolist.removeChild(li);
+            });
+
+            const editBtn = document.createElement("button");
+            editBtn.innerText = "Edit";
+            editBtn.addEventListener("click", function() {
+                inputbox.value = p.innerText;
+                todolist.removeChild(li);
+            });
+
+            // Append elements to the li
+            li.appendChild(p);
+            li.appendChild(deleteBtn);
+            li.appendChild(editBtn);
+
+            // Append the li to the to-do list
+            todolist.appendChild(li);
+
+            // Clear the input field
+            inputbox.value = "";
+        }
+    </script>
+</body>
+</html>
