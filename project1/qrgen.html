@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #375fa3;
+            height:500px;
+            width: 400px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(128, 193, 219);
+            margin: 0;
+        }
+
+        #generate h1 {
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .qr-header input {
+            margin-top: 1px;
+            
+            border-radius: 8px;
+            width: 300px;
+            height: 30px;
+            padding-left: 8px;
+            margin-bottom: 10px;
+            margin-left:30px;
+            margin-right: auto;
+        }
+
+        #labelselect {
+            margin-right: 150px;
+            margin-top: 5px;
+            
+            text-align: center;
+        }
+
+        .qr-header select {
+            border-radius: 8px;
+            padding: 5px;
+            margin-top: 10px;
+        ;
+        }
+
+        .qr-footer {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .qr-footer p {
+            margin: 0;
+            padding: 10px;
+            background-color: #2f6fa3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 100px;
+        }
+
+        .qr-footer a {
+            text-decoration: none;
+        }
+
+        .qr-footer p:hover {
+            background-color: #1c4e75;
+        }
+        .qr-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 230px;
+        background-color: #fff;
+        margin-top: 20px;
+        width: 230px;
+        margin-left: 70px; 
+        margin-right: 0; 
+        border-radius: 15px;
+    }
+     .box button{
+        margin-bottom: 1px;
+        margin-top: 10px;
+        height:30px;
+        width: 42px;
+        margin-left: 160px;
+    }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="qr-header">
+            <div id="generate"><h1>GENERATE QR CODE</h1></div>
+            <input type="text" placeholder="Type text or URL" id="searchbar">
+            <div id="labelselect">
+                <label for="size" style="color: white;">Size:</label>
+                <select id="sizes">
+                    <option value="100">100x100</option>
+                    <option value="200">200x200</option>
+                   
+                   
+                 </select>
+            </div>
+        </div>
+
+        <div class="qr-body">
+            <!-- QR Code will be generated here -->
+        </div>
+        <button class="cancel">clear</button>
+
+        <div class="qr-footer">
+            <a href="#"><p id="gen">GENERATE</p></a>
+            <a href="#"><p id="down">DOWNLOAD</p></a>
+        </div>
+    </div>
+
+    <!-- Include QR Code library -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <script>
+        let searchbar = document.querySelector("#searchbar");
+        let sizes = document.querySelector("#sizes");
+        const generatebtn = document.querySelector("#gen");
+        const downloadbtn = document.querySelector("#down");
+        const qrbody = document.querySelector(".qr-body");
+        const clearbutton = document.querySelector(".cancel")
+        clearbutton.addEventListener("click",function(e){
+            clearQR();
+        })
+        function clearQR(){
+            qrbody.innerHTML=""
+        }
+
+        // Listen for the generate button click
+        generatebtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            generateQR();
+        });
+
+        // Function to generate QR Code
+        function generateQR() {
+            let size = sizes.value;  // Get size from select dropdown
+            qrbody.innerHTML = "";    // Clear previous QR code
+            new QRCode(qrbody, {
+                text: searchbar.value,
+                width: size,
+                height: size,
+                colorLight: "#fff",
+                colorDark: "#000",
+            });
+        }
+    </script>
+</body>
+</html>
