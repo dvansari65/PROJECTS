@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        /* Universal Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container Styling */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 450px;
+            padding: 40px;
+            background: linear-gradient(135deg, #50cbcf, #31709d);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields Styling */
+        .container .main div {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .container .main div p {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .container .main div input {
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            border-radius: 7px;
+            font-size: 16px;
+            border: 1px solid #060505;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .container .main div input:focus {
+            border-color: #40a2d3;
+        }
+
+        /* Error and Success Messages */
+        .container .main div p#error {
+            font-size: 14px;
+            color: #d90c3f;
+            position: absolute;
+            bottom: -20px;
+            left: 10px;
+        }
+
+        .container .main div p.success {
+            font-size: 14px;
+            color: green;
+            position: absolute;
+            bottom: -20px;
+            left: 10px;
+        }
+
+        /* Button Styling */
+        .container #button {
+            width: 100%;
+            height: 45px;
+            font-size: 18px;
+            border-radius: 10px;
+            background-color: #38aae3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+
+        .container #button:hover {
+            background-color: #7fcceb;
+            transform: scale(1.05);
+        }
+
+        /* Footer Styling */
+        .container footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .container footer a {
+            color: #7fcceb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .container footer a:hover {
+            color: #38aae3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SIGN UP</h1>
+        </div>
+        <main class="main">
+            <!-- Username Field -->
+            <div class="username">
+                <p>Enter name:</p>
+                <input type="text" id="name" placeholder="Enter full name:" />
+                <p id="nameerror"></p>
+            </div>
+
+            <!-- Email Field -->
+            <div class="email">
+                <p>Enter email:</p>
+                <input type="email" id="emailid" placeholder="xyz@gmail.com" />
+                <p id="Emailerror"></p>
+            </div>
+
+            <!-- Password Field -->
+            <div class="password">
+                <p>Enter password:</p>
+                <input type="password" id="userpassword" placeholder="At least 8 characters:" />
+                <p id="passworderror"></p>
+            </div>
+
+            <!-- Submit Button -->
+            <p>
+                <button id="button">CREATE ACCOUNT</button>
+            </p>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <p>Already have an account? <a href="#">Login</a></p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        const username = document.querySelector("#name");
+        const useremail = document.querySelector("#emailid");
+        const userpassword = document.querySelector("#userpassword");
+        const button = document.querySelector("#button");
+        const nameerror = document.querySelector("#nameerror");
+        const emailerror = document.querySelector("#Emailerror");
+        const passworderror = document.querySelector("#passworderror");
+
+        button.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (validatename() && validateemail() && validatepassword()) {
+                alert("Account created successfully!");
+            }
+        });
+
+        // Name Validation
+        function validatename() {
+            let name = username.value.trim();
+            if (name === "") {
+                nameerror.textContent = "Enter something!";
+                return false;
+            }
+            if (!name.match(/\b\w+\b.*\b\w+\b.*\b\w+\b/)) {
+                nameerror.textContent = "Enter full name!";
+                return false;
+            }
+            nameerror.textContent = "Successfully done!";
+            nameerror.classList.add("success");
+            return true;
+        }
+
+        // Email Validation
+        function validateemail() {
+            let validemail = useremail.value.trim();
+            let emailformat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (validemail === "") {
+                emailerror.textContent = "Enter something!";
+                return false;
+            }
+            if (!validemail.match(emailformat)) {
+                emailerror.textContent = "Email format is INCORRECT!";
+                return false;
+            }
+            emailerror.textContent = "Successfully done!";
+            emailerror.classList.add("success");
+            return true;
+        }
+
+        // Password Validation
+        function validatepassword() {
+            let passwordvalid = userpassword.value.trim();
+            if (passwordvalid.length === 0) {
+                passworderror.textContent = "Enter password!";
+                return false;
+            }
+            if (passwordvalid.length < 8) {
+                passworderror.textContent = "Enter at least 8 characters!";
+                return false;
+            }
+            if (passwordvalid.length > 30) {
+                passworderror.textContent = "Password is too large!";
+                return false;
+            }
+            passworderror.textContent = "Successfully done!";
+            passworderror.classList.add("success");
+            return true;
+        }
+    </script>
+</body>
+</html>
