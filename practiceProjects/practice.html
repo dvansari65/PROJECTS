@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    body{
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:100% ;
+        width: 100%;
+        background-color: rgb(102, 133, 165);
+    }
+    
+    .container{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content:flex-start;
+        align-items: center;
+        height:400px ;
+        width: 320px;
+        background: linear-gradient(135deg, #b09bbf, #bf86de, #9a48d5);
+        border-radius: 15px;
+        box-shadow:10px 10px 15px rgb(64, 45, 98);
+        transition: transform 0.5s ease-in-out;
+    }
+    .container:hover{
+        transform: scale(1.05);
+        box-shadow: 7px 7px 7px rgb(125, 104, 158);;
+    }
+    .display p{
+       height: 50px;
+       width: 260px;
+       margin-top: 20px;
+       padding: 10px;
+       border-radius: 10px;
+       border: none;
+       background-color: #d2bdd7;
+       font-size: 20px;
+       transition: transform 0.3s ease-in-out;
+    }
+    .display p:hover{
+        background-color: #e9cde9;
+    }
+    .container .buttons {
+        display: grid;
+        grid-template-columns:repeat(3,1fr) ;
+        height:300px;
+        width: 260px;
+        padding: 5px;
+        margin: 13px auto;
+        gap: 7px;
+        border-radius: 5px;
+       
+    }
+    .buttons button{
+        border-radius: 7px;
+        background-color: #d6cad9;
+        border:none;
+        box-shadow:3px 3px 3px 2px rgb(97, 96, 96);
+        transition: transform 0.3s ease-in-out;
+    }
+    .buttons button:hover{
+        transform: scale(1.05);
+        background-color: #fff;
+    }
+
+    
+</style>
+<body>
+    <div class="container">
+        <div class="display">
+            <p></p>
+        </div>
+        <div class="buttons">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>=</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>+</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>-</button>
+        <button>DEL</button>
+        <button>AC</button>
+        <button>/</button>
+        <button>*</button>
+        <button> &larr; </button>
+        
+        </div>
+    </div>
+    
+</body>
+</html>
